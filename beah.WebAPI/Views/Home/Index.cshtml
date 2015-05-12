@@ -1,0 +1,202 @@
+﻿@model beah.WebAPI.ViewModels.JobViewModel
+
+@{
+    ViewBag.Title = "Home Page";
+    var mapCanvasId = "map-canvas";
+}
+
+@using (Html.BeginForm())
+{
+    @section featured {
+
+
+        <section class="featured">
+    <div class="content-wrapper">
+        <hgroup class="title">
+            <h2>@ViewBag.Message</h2>
+        </hgroup>
+        <p>
+            <script type="text/javascript">
+
+
+
+                var placeSearch, autocomplete;
+                var component_form = {
+                    'street_number': 'short_name',
+                    'route': 'long_name',
+                    'locality': 'long_name',
+                    'administrative_area_level_1': 'short_name',
+                    'country': 'long_name',
+                    'postal_code': 'short_name'
+                };
+
+                function initialize() {
+                    autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'), { types: ['geocode'] });
+                    google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                        fillInAddress();
+                    });
+                }
+
+                function mapInitialize() {
+
+                    getCurrentLocation();
+                }
+
+                function fillInAddress() {
+                    var place = autocomplete.getPlace();
+
+                    console.log(place.geometry.location.A);
+                    console.log(place.geometry.location.F);
+
+                    setMapPosition(place.geometry.location.A, place.geometry.location.F, 18);
+
+
+                    for (var component in component_form) {
+                        document.getElementById(component).value = "";
+                        document.getElementById(component).disabled = false;
+                    }
+
+                    for (var j = 0; j < place.address_components.length; j++) {
+                        var att = place.address_components[j].types[0];
+                        if (component_form[att]) {
+                            var val = place.address_components[j][component_form[att]];
+                            document.getElementById(att).value = val;
+                        }
+                    }
+                }
+
+                function getCurrentLocation() {
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(showPosition);
+                    } else {
+                        //alert("Geolocation is not supported by this browser.");
+                    }
+                }
+
+                function setMapPosition(lat, lng, zoom) {
+
+
+                    var mapCanvas = document.getElementById('@mapCanvasId');
+                    var mapOptions = {
+                        center: new google.maps.LatLng(lat, lng),
+                        zoom: zoom,
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    }
+                    var map = new google.maps.Map(mapCanvas, mapOptions);
+
+                    console.log(lat);
+                    console.log(lng);
+
+                    var marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(lat, lng),
+                        map: map,
+                        title: 'Location'
+                    });
+
+
+                }
+
+                function showPosition(position) {
+                    setMapPosition(position.coords.latitude, position.coords.longitude, 10);
+                }
+
+                function geolocate() {
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(function (position) {
+
+
+                            var geolocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                            autocomplete.setBounds(new google.maps.LatLngBounds(geolocation, geolocation));
+
+
+                        });
+                    }
+                }
+
+
+            </script>
+
+
+
+            <div id="locationField">
+                <input id="autocomplete" placeholder="Enter your address" onfocus=" geolocate() " type="text"></input>
+
+            </div>
+            <br />
+            <input type="button" id="autocompleteReset" value="Clear Search" />
+            <script>
+                $('#autocompleteReset').click(
+                    function () {
+
+                        $('#autocomplete').val("");
+                    }
+                );
+            </script>
+            <table id="address" style="padding: 20px">
+                <tr>
+                    <td class="label">Street</td>
+                    <td class="slimField"><input class="field" id="street_number" disabled="true"></input></td>
+                    <td class="wideField" colspan="2"><input class="field" id="route" disabled="true"></input></td>
+                </tr>
+                <tr>
+                    <td class="label">City</td>
+                    <td class="wideField" colspan="3"><input class="field" id="locality" disabled="true"></input></td>
+                </tr>
+                <tr>
+                    <td class="label">State</td>
+                    <td class="slimField"><input class="field" id="administrative_area_level_1" disabled="true"></input></td>
+                    <td class="label">Zip code</td>
+                    <td class="wideField"><input class="field" id="postal_code" disabled="true"></input></td>
+                </tr>
+                <tr>
+                    <td class="label">Country</td>
+                    <td class="wideField" colspan="3"><input class="field" id="country" disabled="true"></input></td>
+                </tr>
+                
+                <tr>
+
+
+                    <td class="label" @Html.LabelFor(x => x.Job.Details)</td>
+                    <td class="wideField" colspan="3">@Html.TextAreaFor(x => x.Job.Details)</td>
+                </tr>
+                <tr>
+
+
+                    <td class="label" @Html.LabelFor(x => x.Job.Instructions)</td>
+                    <td class="wideField" colspan="3">@Html.TextAreaFor(x => x.Job.Instructions)</td>
+                </tr>
+
+
+<tr>
+                   
+
+            <td class="label">@Html.LabelFor(x => x.Job.Properties.First().Operator.Email)</td>
+                    <td class="wideField" colspan="3">@Html.TextBoxFor(x => x.Job.Properties.First().Operator.Email)</td>
+                        
+
+                        @Html.HiddenFor(x => x.Job.Properties.First().Address.Latitude, new { id = "__property_address_latitude" })
+                        @Html.HiddenFor(x => x.Job.Properties.First().Address.Longtitude, new { id = "__property_address_longtitude" })
+
+
+
+                </tr>
+
+                <tr>
+                    <td colspan="4" style="padding: 20px">
+                        <div id="@mapCanvasId"></div>
+                        <script>
+                            google.maps.event.addDomListener(window, 'load', mapInitialize);
+                        </script>
+                    </td>
+                </tr>
+
+            </table>
+        </p>
+    </div>
+
+</section>
+
+    }
+}
+
+

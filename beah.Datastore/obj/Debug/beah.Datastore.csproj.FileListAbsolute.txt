@@ -1,0 +1,10 @@
+c:\development\beah\beah.Datastore\bin\Debug\beah.Datastore.dll.config
+c:\development\beah\beah.Datastore\bin\Debug\beah.Datastore.dll
+c:\development\beah\beah.Datastore\bin\Debug\beah.Datastore.pdb
+c:\development\beah\beah.Datastore\bin\Debug\EntityFramework.dll
+c:\development\beah\beah.Datastore\bin\Debug\EntityFramework.SqlServer.dll
+c:\development\beah\beah.Datastore\bin\Debug\EntityFramework.xml
+c:\development\beah\beah.Datastore\bin\Debug\EntityFramework.SqlServer.xml
+c:\development\beah\beah.Datastore\obj\Debug\beah.Datastore.csprojResolveAssemblyReference.cache
+c:\development\beah\beah.Datastore\obj\Debug\beah.Datastore.dll
+c:\development\beah\beah.Datastore\obj\Debug\beah.Datastore.pdb

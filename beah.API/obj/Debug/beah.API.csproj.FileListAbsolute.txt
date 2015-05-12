@@ -1,0 +1,5 @@
+c:\development\beah\beah.API\bin\Debug\beah.API.dll
+c:\development\beah\beah.API\bin\Debug\beah.API.pdb
+c:\development\beah\beah.API\obj\Debug\beah.API.csprojResolveAssemblyReference.cache
+c:\development\beah\beah.API\obj\Debug\beah.API.dll
+c:\development\beah\beah.API\obj\Debug\beah.API.pdb
