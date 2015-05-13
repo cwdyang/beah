@@ -25,6 +25,40 @@ namespace beah.WebAPI
 
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
 
+
+            //DAVIDY JQUERY
+            bundles.Add(new StyleBundle("~/Content/jquerycss").Include("~/Content/jquery.*"));
+            bundles.Add(new ScriptBundle("~/bundles/jquerymobile").Include(
+                "~/Scripts/jquery-1.8.2.intellisense.js",
+"~/Scripts/jquery-1.8.2.js",
+"~/Scripts/jquery-1.8.2.min.js",
+"~/Scripts/jquery-ui-1.8.24.js",
+"~/Scripts/jquery-ui-1.8.24.min.js",
+"~/Scripts/jquery.mobile-1.4.5.js",
+"~/Scripts/jquery.mobile-1.4.5.min.js",
+"~/Scripts/jquery.mobile-1.4.5.min.map",
+"~/Scripts/jquery.unobtrusive-ajax.js",
+"~/Scripts/jquery.unobtrusive-ajax.min.js",
+"~/Scripts/jquery.validate-vsdoc.js",
+"~/Scripts/jquery.validate.js",
+"~/Scripts/jquery.validate.min.js",
+"~/Scripts/jquery.validate.unobtrusive.js",
+"~/Scripts/jquery.validate.unobtrusive.min.js",
+"~/Scripts/knockout-2.2.0.debug.js",
+"~/Scripts/knockout-2.2.0.js",
+"~/Scripts/modernizr-2.6.2.js",
+"~/Scripts/_references.js"));
+
+
+            ///DAVIDY GOOGLE PLACES
+            bundles.UseCdn = true;
+
+            //DAVIDY BEAH
+            bundles.Add(new StyleBundle("~/Content/themes/beah/css").Include(
+                 "~/Content/themes/beah/jquery.mobile.icons.min.css",
+                 "~/Content/themes/beah/beah.min.css",
+                "~/Content/themes/beah/beah.css"));
+
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",
                         "~/Content/themes/base/jquery.ui.resizable.css",

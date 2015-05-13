@@ -19,7 +19,6 @@ c:\development\beah\beah.WebAPI.Tests\bin\Debug\System.Web.WebPages.Deployment.d
 c:\development\beah\beah.WebAPI.Tests\bin\Debug\System.Web.WebPages.dll
 c:\development\beah\beah.WebAPI.Tests\bin\Debug\System.Web.WebPages.Razor.dll
 c:\development\beah\beah.WebAPI.Tests\bin\Debug\EntityFramework.dll
-c:\development\beah\beah.WebAPI.Tests\bin\Debug\System.Web.Optimization.dll
 c:\development\beah\beah.WebAPI.Tests\bin\Debug\Ninject.Web.Common.dll
 c:\development\beah\beah.WebAPI.Tests\bin\Debug\Ninject.dll
 c:\development\beah\beah.WebAPI.Tests\bin\Debug\beah.Library.Web.dll
@@ -91,3 +90,5 @@ c:\development\beah\beah.WebAPI.Tests\bin\Debug\zh-Hant\System.Spatial.resources
 c:\development\beah\beah.WebAPI.Tests\obj\Debug\beah.WebAPI.Tests.csprojResolveAssemblyReference.cache
 c:\development\beah\beah.WebAPI.Tests\obj\Debug\beah.WebAPI.Tests.dll
 c:\development\beah\beah.WebAPI.Tests\obj\Debug\beah.WebAPI.Tests.pdb
+c:\development\beah\beah.WebAPI.Tests\bin\Debug\beah.Domain.dll
+c:\development\beah\beah.WebAPI.Tests\bin\Debug\beah.Domain.pdb

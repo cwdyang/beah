@@ -26,3 +26,10 @@ c:\development\beah\beah.Library.Web\bin\Debug\System.Web.Razor.xml
 c:\development\beah\beah.Library.Web\bin\Debug\System.Web.WebPages.xml
 c:\development\beah\beah.Library.Web\bin\Debug\System.Web.WebPages.Deployment.xml
 c:\development\beah\beah.Library.Web\bin\Debug\System.Web.WebPages.Razor.xml
+c:\development\beah\beah.Library.Web\bin\Debug\beah.Library.Web.dll.config
+c:\development\beah\beah.Library.Web\bin\Debug\Antlr3.Runtime.dll
+c:\development\beah\beah.Library.Web\bin\Debug\Newtonsoft.Json.dll
+c:\development\beah\beah.Library.Web\bin\Debug\System.Web.Optimization.dll
+c:\development\beah\beah.Library.Web\bin\Debug\WebGrease.dll
+c:\development\beah\beah.Library.Web\bin\Debug\Antlr3.Runtime.pdb
+c:\development\beah\beah.Library.Web\bin\Debug\Newtonsoft.Json.xml
