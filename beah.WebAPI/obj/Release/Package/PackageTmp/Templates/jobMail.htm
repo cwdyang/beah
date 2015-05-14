@@ -1,0 +1,51 @@
+﻿<html>
+    <head>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
+        <style>
+            #map-canvas {
+                width: 300px;
+                height: 300px;
+                visibility:hidden;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>PO# {po}</h2>
+        <br />
+        <p>
+            {description} 
+            <br/>
+            Map:
+        </p>
+        <img border="0" src="https://maps.googleapis.com/maps/api/staticmap?center={lat}, {lng}&amp;zoom=13&amp;size=600x300&amp;maptype=roadmap&amp;markers=color:blue%7Clabel:S%7C{lat}, {lng}" alt="{location}">
+        <div id="map-canvas"></div>
+        <script>
+            function mapInitialize() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(showPosition);
+                }
+            }
+            function showPosition(position) {
+                setMapPosition(position.coords.latitude, position.coords.longitude, 10);
+            }            function setMapPosition(lat, lng, zoom) {
+                var mapCanvas = document.getElementById('map-canvas');
+                var mapOptions = {
+                    center: new google.maps.LatLng(lat, lng),
+                    zoom: zoom,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+                var map = new google.maps.Map(mapCanvas, mapOptions);
+
+                console.log(lat);
+                console.log(lng);
+
+                var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(lat, lng),
+                    map: map,
+                    title: 'Location'
+                });
+            }
+            setMapPosition({lat}, {lng}, 10);
+        </script>
+    </body>
+</html>

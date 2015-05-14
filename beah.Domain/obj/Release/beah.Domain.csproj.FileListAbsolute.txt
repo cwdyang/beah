@@ -1,0 +1,5 @@
+c:\development\beah\beah.Domain\bin\Release\beah.Domain.dll
+c:\development\beah\beah.Domain\bin\Release\beah.Domain.pdb
+c:\development\beah\beah.Domain\obj\Release\beah.Domain.csprojResolveAssemblyReference.cache
+c:\development\beah\beah.Domain\obj\Release\beah.Domain.dll
+c:\development\beah\beah.Domain\obj\Release\beah.Domain.pdb

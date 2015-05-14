@@ -1,0 +1,7 @@
+﻿api_user={api_user}&
+api_key={api_key}&
+to={to}&
+toname={toname}&
+subject={subject}&
+html={html}&
+from={from}

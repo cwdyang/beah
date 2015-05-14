@@ -1,0 +1,7 @@
+﻿api_user=azure_a16f114416499661d776d294fc86a36d@azure.com&
+api_key=gd3v2cT6aG3DtL9&
+to=davidy@datacom.co.nz&
+toname=dave&
+subject=Example_Subject&
+text=Test&
+from=admin@bea.com
