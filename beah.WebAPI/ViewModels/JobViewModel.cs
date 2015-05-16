@@ -10,6 +10,12 @@ namespace beah.WebAPI.ViewModels
     {
         public Job Job { get; set; }
 
+        //always need this!!
+        public JobViewModel()
+        {
+            
+        }
+
         public JobViewModel(Job job)
         {
             Job = job;            

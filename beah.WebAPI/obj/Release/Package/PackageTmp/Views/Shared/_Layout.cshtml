@@ -19,7 +19,7 @@
 
     @Scripts.Render("~/Scripts/jquery.mobile-1.4.5.min.js")
 
-
+    
 
 </head>
 <body onload="initialize()">
@@ -31,12 +31,12 @@
 
             <div class="ui-icon-bars">
 
-                @Html.ActionLink("Home", "Index", "Home", null, new { @class = "ui-btn-icon-notext ui-btn-corner-all ui-btn ui-icon-home ui-btn-icon-notext ui-shadow" })
+                @Html.ActionLink("Home", "Index", "Home", null, new {@title="Home", @class = "ui-btn-icon-notext ui-btn-corner-all ui-btn ui-icon-home ui-btn-icon-notext ui-shadow" })
 
                 
-                @Html.ActionLink("SendMail", "SendMail", "Home", null, new { @class = "ui-btn-icon-notext ui-btn-corner-all ui-btn ui-icon-mail ui-btn-icon-notext ui-shadow" })
+                @Html.ActionLink("SendMail", "SendMail", "Home", null, new { @title = "Send Mail", @class = "ui-btn-icon-notext ui-btn-corner-all ui-btn ui-icon-mail ui-btn-icon-notext ui-shadow" })
 
-                @Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "ui-btn-icon-notext ui-btn-corner-all ui-btn ui-icon-phone ui-btn-icon-notext ui-shadow" })
+                @Html.ActionLink("Contact", "Contact", "Home", null, new { @title = "Contact Us", @class = "ui-btn-icon-notext ui-btn-corner-all ui-btn ui-icon-phone ui-btn-icon-notext ui-shadow" })
                 
                 
 

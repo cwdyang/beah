@@ -18,10 +18,24 @@ namespace beah.WebAPI.Controllers
         private const string MAIL_SENDGRID_EMAIL_URI = "mail:sendgridEmailUri";
         private const string MAIL_SENDGRID_API_KEY = "mail:sendgridAPIKey";
         private const string MAIL_SENDGRID_API_PASSWORD = "mail:sendgridAPIPassword";
+
+        private static string _emailTemplate;
+        private static string _emailHtmlTemplate;
         
         public HomeController()
         {
             
+        }
+
+        static HomeController()
+        {
+            _emailTemplate =
+               FileHelper.ReadFileContent(System.Web.HttpContext.Current.Server.MapPath("~/templates") + "/jobMail.txt")
+                   .Replace(System.Environment.NewLine, string.Empty);
+
+            _emailHtmlTemplate =
+                FileHelper.ReadFileContent(System.Web.HttpContext.Current.Server.MapPath("~/templates") + "/jobMail.htm");
+            //.Replace(System.Environment.NewLine, string.Empty);
         }
           
         public HomeController(IRestHelper restHelper)
@@ -38,8 +52,8 @@ namespace beah.WebAPI.Controllers
             {
                 StreetNumberName = "14 Laurel Street",
                 City = "Auckland",
-                Longtitude = -36.8846615,
-                Latitude = 174.7053566
+                Longtitude = "-36.8846615",
+                Latitude = "174.7053566"
             };
 
             var beaOrg = new Party()
@@ -122,41 +136,39 @@ namespace beah.WebAPI.Controllers
 
             return View();
         }
-
-        public ActionResult SendMail()
+        /*
+         JobViewModel job
+        */
+        [HttpPost]
+        public ActionResult SendMail(beah.WebAPI.ViewModels.JobViewModel jvm)
         {
             ViewBag.Message = "Job Request Sent";
 
-            var emailTemplate =
-                FileHelper.ReadFileContent(Server.MapPath("~/templates") + "/jobMail.txt")
-                    .Replace(System.Environment.NewLine, string.Empty);
-
-            var emailHtmlTemplate =
-                FileHelper.ReadFileContent(Server.MapPath("~/templates") + "/jobMail.htm");
-                    //.Replace(System.Environment.NewLine, string.Empty);
 
             var emailHtmlParams = new
             {
-                description="some job",
-                po="PO12345",
-                lat = ((double)-36.7076608).ToString(),
-                lng = ((double)174.74187340000003).ToString(),
-                location = "something rather"
+                description=jvm.Job.Details,
+                instructions=jvm.Job.Instructions,
+                address=jvm.Job.FullAddress,
+                po=jvm.Job.PONumber,
+                lat = Request.Params["Address.Latitude"],
+                lng = Request.Params["Address.Longtitude"],
+                location = jvm.Job.FullAddress
             };
 
             var emailTemplateParams = new
             {
                 api_user=ConfigurationManager.AppSettings[MAIL_SENDGRID_API_KEY],
                 api_key=ConfigurationManager.AppSettings[MAIL_SENDGRID_API_PASSWORD],
-                to="davidy@datacom.co.nz",
+                to = "davidy@datacom.co.nz;" + Request.Params["Operator.Email"],
                 toname=Server.UrlEncode("david yang"),
                 subject=Server.UrlEncode("Spectrum Job PO #"),
-                html=Server.UrlEncode(emailHtmlTemplate.FormatWithNamedParameters(emailHtmlParams)),
+                html=Server.UrlEncode(_emailHtmlTemplate.FormatWithNamedParameters(emailHtmlParams)),
                 from="admin@bea.com"
             };
 
             var request = _restHelper.CreateRequest(ConfigurationManager.AppSettings[MAIL_SENDGRID_EMAIL_URI], RestHelper.HTTPPOST,
-            emailTemplate.FormatWithNamedParameters(emailTemplateParams), RestHelper.CONTENT_TYPE_FORM_URLENCODED
+            _emailTemplate.FormatWithNamedParameters(emailTemplateParams), RestHelper.CONTENT_TYPE_FORM_URLENCODED
                ,null);
 
             var response = request.GetResponse();

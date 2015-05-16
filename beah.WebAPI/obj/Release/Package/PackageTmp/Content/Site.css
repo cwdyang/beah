@@ -801,6 +801,10 @@ tr.pager td {
                         width: 200px;
                     }
 
+                    .wide100PCField {
+                        width: 100%;
+                    }
+
                     #locationField {
                         height: 20px;
                         margin-bottom: 2px;

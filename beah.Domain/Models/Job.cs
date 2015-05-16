@@ -20,6 +20,9 @@ namespace beah.Domain.Models
         [Display(Name = "Instructions")]
         public string Instructions { get; set; }
 
+        [Display(Name = "FullAddress")]
+        public string FullAddress { get; set; }
+
         [Display(Name = "Required By")]
         public DateTimeOffset RequiredByDateTime { get; set; }
 

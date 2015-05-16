@@ -1,0 +1,75 @@
+﻿@using beah.Library.Web.ScriptBundling
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+
+    @Styles.Render("~/Content/jquerycss")
+    @Styles.Render("~/Content/themes/beah/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+
+    @Scripts.Render("~/bundles/jquerymobile")
+
+    @Url.RenderScript("https://maps.googleapis.com/maps/api/js?libraries=places")
+
+
+    @Scripts.Render("~/Scripts/jquery.mobile-1.4.5.min.js")
+
+
+
+</head>
+<body onload="initialize()">
+    <header>
+
+
+        <div class="ui-header ui-bar-a" style="align-content: center;" data-swatch="a" data-theme="a" data-form="ui-bar-a" data-role="header" role="banner">
+
+
+            <div class="ui-icon-bars">
+
+                @Html.ActionLink("Home", "Index", "Home", null, new { @class = "ui-btn-icon-notext ui-btn-corner-all ui-btn ui-icon-home ui-btn-icon-notext ui-shadow" })
+
+                
+                @Html.ActionLink("SendMail", "SendMail", "Home", null, new { @class = "ui-btn-icon-notext ui-btn-corner-all ui-btn ui-icon-mail ui-btn-icon-notext ui-shadow" })
+
+                @Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "ui-btn-icon-notext ui-btn-corner-all ui-btn ui-icon-phone ui-btn-icon-notext ui-shadow" })
+                
+                
+
+                    @Html.Partial("_LoginPartial")
+
+            </div>
+
+
+
+
+
+
+
+        </div>
+
+        
+
+    </header>
+    <div id="body" style="padding: 50px;">
+        @RenderSection("featured", required: false)
+        <section class="content-wrapper main-content clear-fix">
+            @RenderBody()
+        </section>
+    </div>
+    <footer>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+            </div>
+        </div>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

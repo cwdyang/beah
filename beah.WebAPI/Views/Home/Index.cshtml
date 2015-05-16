@@ -1,260 +1,348 @@
-﻿@model beah.WebAPI.ViewModels.JobViewModel
+﻿@using beah.Domain.Models
+@model beah.WebAPI.ViewModels.JobViewModel
 
 @{
     ViewBag.Title = "Home Page";
     var mapCanvasId = "map-canvas";
 }
 
-@using (Html.BeginForm())
+@section featured {
+
+    <section class="featured">
+
+        @using (Ajax.BeginForm("SendMail", "Home", new AjaxOptions
 {
-    @section featured {
+    Confirm = "Ready to submit?",
+    OnSuccess = "SuccessMessage",
+    OnFailure = "FailMessage",
+    HttpMethod = "POST",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "resultTarget"
+}))
+        {
 
 
 
-
-
-
-        <section class="featured">
             <ul class="content-wrapper">
 
-                <p>
-                    <script type="text/javascript">
+
+
+                <ul data-role="listview" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
+                    <li data-role="list-divider" data-theme="a" data-swatch="a" data-form="ui-bar-a" role="heading" class="ui-li-divider ui-bar-a ui-first-child">Logged in as</li>
+                    <li data-form="ui-body-a" data-swatch="a" data-theme="a" class="ui-li-static ui-body-a">
+                        <div>
+                            <img src="~/Content/images/clients/spectrum/photo__spectrumcarelogo.jpg" />
+                        </div>
+                    </li>
+                    <li class="ui-last-child">
+
+                        <a class="ui-btn-a ui-btn ui-btn-icon-right ui-icon-carat-r" data-form="ui-btn-up-a" data-swatch="a" data-theme="a" href="#" id=""></a>
+
+                    </li>
+                </ul>
+                <br />
+
+                <ul data-role="listview" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
+                    <li data-role="list-divider" data-theme="a" data-swatch="a" data-form="ui-bar-a" role="heading" class="ui-li-divider ui-bar-a ui-first-child">@ViewBag.Message Search for property</li>
+                    <li data-form="ui-body-a" data-swatch="a" data-theme="a" class="ui-li-static ui-body-a">
+                        <input id="autocomplete" placeholder="Enter your address" onfocus=" geolocate() " style="width: 100%" type="text" class="ui-textinput-autogrow-resize wide100PCField ui-corner-all" />
+                    </li>
+                    <li>
+
+                        <a class="ui-btn-a ui-btn ui-btn-icon-right ui-icon-carat-r" data-form="ui-btn-up-a" data-swatch="a" data-theme="a" href="#" id="autocompleteSearch">Search</a>
+
+                    </li>
+                    <li class="ui-last-child">
+
+                        <a class="ui-btn-a ui-btn ui-btn-icon-right ui-icon-carat-r" data-form="ui-btn-up-a" data-swatch="a" data-theme="a" href="#" id="autocompleteReset">Reset</a>
+
+                    </li>
+
+                </ul>
+                <br />
+                <ul data-role="listview" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
+                    <li data-role="list-divider" data-theme="a" data-swatch="a" data-form="ui-bar-a" role="heading" class="ui-li-divider ui-bar-a ui-first-child">Closest Address</li>
+                    <li data-form="ui-body-a" data-swatch="a" data-theme="a" class="ui-li-static ui-body-a">
+
+                        <div class="ui-grid-a">
+                            <div class="ui-block-a">
+                                <input placeholder="Street #" id="street_number" style="width: 50%" class="ui-textinput-autogrow-resize wide100PCField ui-corner-all" data-inline="true">
+                            </div>
+                            <div class="ui-block-b">
+                                <input placeholder="Street Name" id="route" style="width:50%" class="ui-textinput-autogrow-resize wide100PCField ui-corner-all" data-inline="true">
+                            </div>
+                        </div>
+                        <div>
+                            <input placeholder="Suburb" id="sublocality_level_1" style="width: 100%" class="ui-textinput-autogrow-resize wide100PCField ui-corner-all" />
+                        </div>
+                        <div>
+                            <input placeholder="City" id="locality" style="width: 100%" class="ui-textinput-autogrow-resize wide100PCField ui-corner-all" />
+                        </div>
+                        <div>
+                            <input placeholder="Country" id="country" style="width: 100%" class="ui-textinput-autogrow-resize wide100PCField ui-corner-all" />
+                        </div>
+                    </li>
+                    <li class="ui-last-child">
+
+                        <a class="ui-btn-a ui-btn ui-btn-icon-right ui-icon-carat-r" data-form="ui-btn-up-a" data-swatch="a" data-theme="a" href="#" id=""></a>
+
+                    </li>
+
+                </ul>
+                <br />
+                <ul data-role="listview" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
+                    <li data-role="list-divider" data-theme="a" data-swatch="a" data-form="ui-bar-a" role="heading" class="ui-li-divider ui-bar-a ui-first-child">Purchase Order</li>
 
 
 
-                        var placeSearch, autocomplete;
-                        var component_form = {
-                            'street_number': 'short_name',
-                            'route': 'long_name',
-                            'sublocality_level_1': 'long_name',
-                            'locality': 'long_name',
-                            'administrative_area_level_1': 'short_name',
-                            'country': 'long_name',
-                            'postal_code': 'short_name'
-                        };
+                    <li data-form="ui-body-a" data-swatch="a" data-theme="a" class="ui-li-static ui-body-a">
 
-                        function initialize() {
-                            autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'), { types: ['geocode'] });
-                            google.maps.event.addListener(autocomplete, 'place_changed', function () {
-                                fillInAddress();
-                            });
+
+                        <div>
+                            @Html.TextAreaFor(x => x.Job.PONumber, new
+                            {
+                                placeholder = "Purchase Order Number",
+                                style = "width: 100%",
+                                @class = "ui-textinput-autogrow-resize wide100PCField ui-corner-all"
+                            })
+                        </div>
+
+                    </li>
+                    <li data-role="list-divider" data-theme="a" data-swatch="a" data-form="ui-bar-a" role="heading" class="ui-li-divider ui-bar-a">Job Details, Instructions</li>
+
+                    <li data-form="ui-body-a" data-swatch="a" data-theme="a" class="ui-li-static ui-body-a">
+                        <div>
+                            @Html.TextAreaFor(x => x.Job.Details,
+                                new
+                                {
+                                    placeholder = "Job Details",
+                                    style = "width: 100%",
+                                    @class = "ui-textinput-autogrow-resize wide100PCField ui-corner-all"
+                                })
+                        </div>
+
+                        <div>
+                            @Html.TextAreaFor(x => x.Job.Instructions,
+                                    new
+                                    {
+                                        placeholder = "Special Instructions",
+                                        style = "width: 100%",
+                                        @class = "ui-textinput-autogrow-resize wide100PCField ui-corner-all"
+                                    })
+                        </div>
+                    </li>
+                    <li data-role="list-divider" data-theme="a" data-swatch="a" data-form="ui-bar-a" role="heading" class="ui-li-divider ui-bar-a">Site Contact: @Html.DisplayTextFor(x => x.Job.Properties.First().Operator.Email)</li>
+
+                    <li data-form="ui-body-a" data-swatch="a" data-theme="a" class="ui-li-static ui-body-a">
+
+                        <div>
+                            @Html.TextBoxFor(x => x.Job.Properties.First().Operator.Email,
+                                        new { @class = "ui-textinput-autogrow-resize wide100PCField ui-corner-all", style = "width: 100%" })
+                            @Html.HiddenFor(x => x.Job.Properties.First().Address.Latitude,
+                                        new { id = "propertyAddressLatitude" })
+                            @Html.HiddenFor(x => x.Job.Properties.First().Address.Longtitude,
+                                      new { id = "propertyAddressLongtitude" })
+                            @Html.HiddenFor(x => x.Job.FullAddress,
+                                                 new { id = "propertyFullAddress", placeholder = "Full Address" })
+                            <!--
+                            Html.EditorFor(model => model.Job.Properties)
+                            foreach (Property property in Model.Job.Properties)
+                            {
+                                Html.EditorFor(f => property.Address)
+                            }-->
+                        </div>
+                    </li>
+                    <li data-role="list-divider" data-theme="a" data-swatch="a" data-form="ui-bar-a" role="heading" class="ui-li-divider ui-bar-a">Site Map</li>
+
+                    <li data-form="ui-body-a" data-swatch="a" data-theme="a" class="ui-li-static ui-body-a">
+                        <div>
+                            <div id="@mapCanvasId" style="width: 100%; height: 400px;"></div>
+                            <script>
+                                google.maps.event.addDomListener(window, 'load', mapInitialize);
+                            </script>
+                        </div>
+                    </li>
+
+                    <li data-form="ui-body-a" data-swatch="a" data-theme="a" class="ui-li-static ui-body-a">
+                        <button class="ui-btn-a ui-btn ui-btn-icon-right ui-icon-carat-r" data-form="ui-btn-up-a" data-swatch="a" data-theme="a" style="width:100%" id="submit">Despatch Job</button>
+                    </li>
+                    <li data-form="ui-body-a" data-swatch="a" data-theme="a" class="ui-li-static ui-body-a">
+                        <div id="resultTarget">  </div>
+                    </li>
+                    <li class="ui-last-child">
+
+                        <a class="ui-btn-a ui-btn ui-btn-icon-right ui-icon-carat-r" data-form="ui-btn-up-a" data-swatch="a" data-theme="a" href="#" id=""></a>
+
+                    </li>
+                </ul>
+
+
+            </ul>
+
+
+
+            <script type="text/javascript">
+
+
+                var placeSearch, autocomplete;
+                var component_form = {
+                    'street_number': 'short_name',
+                    'route': 'long_name',
+                    'sublocality_level_1': 'long_name',
+                    'locality': 'long_name',
+                    'administrative_area_level_1': 'short_name',
+                    'country': 'long_name',
+                    'postal_code': 'short_name'
+                };
+
+
+
+                function initialize() {
+
+
+
+                    autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'), { types: ['geocode'] });
+
+
+
+                    google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                        fillInAddress();
+                    });
+                }
+
+                function mapInitialize() {
+
+                    getCurrentLocation();
+                }
+
+                function fillInAddress() {
+
+
+
+                    var place = autocomplete.getPlace();
+
+                    console.log(place.geometry.location.lat());
+                    console.log(place.geometry.location.lng());
+
+                    //alert(place.formatted_address);
+
+                    $("#propertyAddressLongtitude").val(place.geometry.location.lng());
+
+                    $("#propertyAddressLatitude").val(place.geometry.location.lat());
+
+
+
+                    $("#propertyFullAddress").val(place.formatted_address.toString());
+
+                    setMapPosition(place.geometry.location.A, place.geometry.location.F, 18);
+
+
+                    for (var component in component_form) {
+
+                        try {
+                            document.getElementById(component).value = "";
+                            document.getElementById(component).disabled = false;
+                        } catch (e) {
+
                         }
 
-                        function mapInitialize() {
+                    }
 
-                            getCurrentLocation();
-                        }
-
-                        function fillInAddress() {
-                            var place = autocomplete.getPlace();
-
-                            console.log(place.geometry.location.A);
-                            console.log(place.geometry.location.F);
-
-                            setMapPosition(place.geometry.location.A, place.geometry.location.F, 18);
+                    for (var j = 0; j < place.address_components.length; j++) {
+                        var att = place.address_components[j].types[0];
+                        //alert(att + place.address_components[j][component_form[att]]);
 
 
-                            for (var component in component_form) {
-
-                                try {
-                                    document.getElementById(component).value = "";
-                                    document.getElementById(component).disabled = false;
-                                } catch (e) {
-
-                                }
+                        if (component_form[att]) {
+                            var val = place.address_components[j][component_form[att]];
+                            try {
+                                document.getElementById(att).value = val;
+                            } catch (e) {
 
                             }
 
-                            for (var j = 0; j < place.address_components.length; j++) {
-                                var att = place.address_components[j].types[0];
-                                alert(att + place.address_components[j][component_form[att]]);
-                                if (component_form[att]) {
-                                    var val = place.address_components[j][component_form[att]];
-                                    try {
-                                        document.getElementById(att).value = val;
-                                    } catch (e) {
-
-                                    }
-
-                                }
-                            }
                         }
+                    }
+                }
 
-                        function getCurrentLocation() {
-                            if (navigator.geolocation) {
-                                navigator.geolocation.getCurrentPosition(showPosition);
-                            } else {
-                                //alert("Geolocation is not supported by this browser.");
-                            }
-                        }
+                function getCurrentLocation() {
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(showPosition);
+                    } else {
+                        //alert("Geolocation is not supported by this browser.");
+                    }
+                }
 
-                        function setMapPosition(lat, lng, zoom) {
+                function setMapPosition(lat, lng, zoom) {
 
-                            var mapCanvas = document.getElementById('@mapCanvasId');
-                            var mapOptions = {
-                                center: new google.maps.LatLng(lat, lng),
-                                zoom: zoom,
-                                mapTypeId: google.maps.MapTypeId.ROADMAP
-                            }
-                            var map = new google.maps.Map(mapCanvas, mapOptions);
+                    var mapCanvas = document.getElementById('@mapCanvasId');
+                    var mapOptions = {
+                        center: new google.maps.LatLng(lat, lng),
+                        zoom: zoom,
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    }
+                    var map = new google.maps.Map(mapCanvas, mapOptions);
 
-                            console.log(lat);
-                            console.log(lng);
+                    console.log(lat);
+                    console.log(lng);
 
-                            var marker = new google.maps.Marker({
-                                position: new google.maps.LatLng(lat, lng),
-                                map: map,
-                                title: 'Location'
-                            });
-                        }
+                    var marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(lat, lng),
+                        map: map,
+                        title: 'Location'
+                    });
+                }
 
-                        function showPosition(position) {
-                            setMapPosition(position.coords.latitude, position.coords.longitude, 10);
-                        }
+                function showPosition(position) {
+                    setMapPosition(position.coords.latitude, position.coords.longitude, 10);
+                }
 
-                        function geolocate() {
-                            if (navigator.geolocation) {
-                                navigator.geolocation.getCurrentPosition(function (position) {
-
-
-                                    var geolocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-                                    autocomplete.setBounds(new google.maps.LatLngBounds(geolocation, geolocation));
+                function geolocate() {
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(function (position) {
 
 
-                                });
-                            }
-                        }
+                            var geolocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                            autocomplete.setBounds(new google.maps.LatLngBounds(geolocation, geolocation));
 
 
-                    </script>
+                        });
+                    }
+                }
 
 
+                $("submit").click(function () {
+                    alert("xxx");
+                    //$(this).parents('form:first').trigger('submit');
+                });
 
 
+                $('#autocompleteReset').click(
+                    function () {
 
+                        $('#autocomplete').val("");
+                    }
+                );
 
-                    <script>
-                        $('#autocompleteReset').click(
-                            function () {
+                function SuccessMessage() {
+                    alert("Succcess Post");
+                }
+                function FailMessage() {
+                    alert("Fail Post");
+                }
 
-                                $('#autocomplete').val("");
-                            }
-                        );
-                    </script>
-
-                    <ul data-role="listview" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
-                        <li style="align-content: center">
-                            <div>
-                                <img src="~/Content/images/clients/spectrum/photo__spectrumcarelogo.jpg" />
-                            </div>
-                        </li>
-                    </ul>
-                    <br />
-
-                    <ul data-role="listview" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
-                        <li data-role="list-divider" data-theme="a" data-swatch="a" data-form="ui-bar-a" role="heading" class="ui-li-divider ui-bar-a ui-first-child">@ViewBag.Message Search for property</li>
-                        <li data-form="ui-body-a" data-swatch="a" data-theme="a" class="ui-li-static ui-body-a"><input id="autocomplete" placeholder="Enter your address" onfocus=" geolocate() " type="text"></input></li>
-                        <li>
-
-                            <a class="ui-btn-a ui-btn ui-btn-icon-right ui-icon-carat-r" data-form="ui-btn-up-a" data-swatch="a" data-theme="a" href="#" id="autocompleteReset">Search</a>
-
-                        </li>
-                        <li class="ui-last-child">
-
-                            <a class="ui-btn-a ui-btn ui-btn-icon-right ui-icon-carat-r" data-form="ui-btn-up-a" data-swatch="a" data-theme="a" href="#" id="autocompleteReset">Reset</a>
-
-                        </li>
-
-                    </ul>
-                    <br />
-                    <ul data-role="listview" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
-                        <li data-role="list-divider" data-theme="a" data-swatch="a" data-form="ui-bar-a" role="heading" class="ui-li-divider ui-bar-a ui-first-child">Closest Address</li>
-                        <li data-form="ui-body-a" data-swatch="a" data-theme="a" class="ui-li-static ui-body-a"><input id="autocomplete" placeholder="Enter your address" onfocus=" geolocate() " type="text"></input></li>
-                        <li>
-
-                            <div class="ui-grid-a">
-                                <div class="ui-block-a">
-                                    <input class="field" placeholder="Street #" id="street_number" disabled="true" data-inline="true">
-                                </div>
-                                <div class="ui-block-b">
-                                    <input class="field" placeholder="Street Name" id="route" disabled="true" data-inline="true">
-                                </div>
-                            </div>
-                            <div>
-                                <input class="field" placeholder="Suburb" id="sublocality_level_1" disabled="true"></input>
-                            </div>
-                            <div>
-                                <input class="field" placeholder="City" id="locality" disabled="true"></input>
-                            </div>
-                            <div>
-                                <input class="field" placeholder="Country" id="country" disabled="true"></input>
-                            </div>
-                        </li>
-                        <li class="ui-last-child">
-
-
-                        </li>
-
-                    </ul>
-                    <br />
-                    <ul data-role="listview" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
-                        <li data-role="list-divider" data-theme="a" data-swatch="a" data-form="ui-bar-a" role="heading" class="ui-li-divider ui-bar-a ui-first-child">Purchase Order</li>
-                        
-
-                        
-                        <li>
-
-                            
-                            <div>
-                                @Html.TextAreaFor(x => x.Job.PONumber, new { placeholder = "Purchase Order Number" })
-                            </div>
-
-                        </li>
-                        <li data-role="list-divider" data-theme="a" data-swatch="a" data-form="ui-bar-a" role="heading" class="ui-li-divider ui-bar-a">Job Details, Instructions</li>
-
-                        <li>
-                            <div>
-                                @Html.TextAreaFor(x => x.Job.Details, new { placeholder = "Job Details" })
-                            </div>
-
-                            <div>
-                                @Html.TextAreaFor(x => x.Job.Instructions, new { placeholder = "Special Instructions" })
-                            </div>
-                        </li>
-                        <li data-role="list-divider" data-theme="a" data-swatch="a" data-form="ui-bar-a" role="heading" class="ui-li-divider ui-bar-a">Site Contact: @Html.DisplayTextFor(x => x.Job.Properties.First().Operator.Email)</li>
-
-                        <li>
-
-                            <div>
-                                @Html.TextBoxFor(x => x.Job.Properties.First().Operator.Email)
-                                @Html.HiddenFor(x => x.Job.Properties.First().Address.Latitude, new { id = "__property_address_latitude" })
-                                @Html.HiddenFor(x => x.Job.Properties.First().Address.Longtitude, new { id = "__property_address_longtitude" })
-
-
-                            </div>
-                        </li>
-                        <li data-role="list-divider" data-theme="a" data-swatch="a" data-form="ui-bar-a" role="heading" class="ui-li-divider ui-bar-a">Site Map</li>
-
-                        
-<li class="ui-last-child">
-
-                            <div>
-                                <div id="@mapCanvasId" style="width: 100%;height: 400px;"></div>
-                                <script>
-                                    google.maps.event.addDomListener(window, 'load', mapInitialize);
-                                </script>
-                            </div>
-                        </li>
-
-                    </ul>
-
-
-
-                </p>
-                </div>
-
-        </section>
-    }
+                /*
+                document.body.onload = function () {
+                    var loadInputAutoResize = function () {
+                        $('#autocomplete').autoGrowInput({ minWidth: 300, maxWidth: 600, comfortZone: 40 });
+                    };
+                    loadInputAutoResize();
+                };
+                */
+            </script>
+        }
+    </section>
 }
+
 
 

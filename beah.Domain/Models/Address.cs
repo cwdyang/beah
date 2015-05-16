@@ -4,11 +4,13 @@ namespace beah.Domain.Models
 {
     public class Address
     {
-        [DataType("decimal")]
-        public double Latitude { get; set; }
+        [StringLength(255)]
+        [DataType("string")]
+        public string Latitude { get; set; }
 
-        [DataType("decimal")]
-        public double Longtitude { get; set; }
+        [StringLength(255)]
+        [DataType("string")]
+        public string Longtitude { get; set; }
 
         [StringLength(255)]
         [DataType("string")]

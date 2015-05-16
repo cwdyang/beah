@@ -29,6 +29,8 @@ namespace beah.WebAPI
             //DAVIDY JQUERY
             bundles.Add(new StyleBundle("~/Content/jquerycss").Include("~/Content/jquery.*"));
             bundles.Add(new ScriptBundle("~/bundles/jquerymobile").Include(
+
+               
                 "~/Scripts/jquery-1.8.2.intellisense.js",
 "~/Scripts/jquery-1.8.2.js",
 "~/Scripts/jquery-1.8.2.min.js",
@@ -36,7 +38,7 @@ namespace beah.WebAPI
 "~/Scripts/jquery-ui-1.8.24.min.js",
 "~/Scripts/jquery.mobile-1.4.5.js",
 "~/Scripts/jquery.mobile-1.4.5.min.js",
-"~/Scripts/jquery.mobile-1.4.5.min.map",
+
 "~/Scripts/jquery.unobtrusive-ajax.js",
 "~/Scripts/jquery.unobtrusive-ajax.min.js",
 "~/Scripts/jquery.validate-vsdoc.js",
@@ -47,7 +49,10 @@ namespace beah.WebAPI
 "~/Scripts/knockout-2.2.0.debug.js",
 "~/Scripts/knockout-2.2.0.js",
 "~/Scripts/modernizr-2.6.2.js",
-"~/Scripts/_references.js"));
+"~/Scripts/_references.js",
+
+ "~/Scripts/jquery.auto-grow-input.js",
+                "~/Scripts/jquery.auto-grow-input.min.js"));
 
 
             ///DAVIDY GOOGLE PLACES

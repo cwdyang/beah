@@ -210,6 +210,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\images\ajax-loader.gif" />
+    <Content Include="Content\images\clients\spectrum\photo__spectrumcarelogo.jpg" />
     <Content Include="Content\images\icons-png\action-black.png" />
     <Content Include="Content\images\icons-png\action-white.png" />
     <Content Include="Content\images\icons-png\alert-black.png" />
@@ -410,6 +411,8 @@
     <Content Include="Content\images\icons-svg\user-white.svg" />
     <Content Include="Content\images\icons-svg\video-black.svg" />
     <Content Include="Content\images\icons-svg\video-white.svg" />
+    <Content Include="Content\jquery.auto-grow-input.js" />
+    <Content Include="Content\jquery.auto-grow-input.min.js" />
     <Content Include="Content\jquery.mobile-1.4.5.css" />
     <Content Include="Content\jquery.mobile-1.4.5.min.css" />
     <Content Include="Content\jquery.mobile.external-png-1.4.5.css" />
@@ -585,9 +588,12 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <None Include="Properties\PublishProfiles\beah.pubxml" />
+    <None Include="Properties\PublishProfiles\localIIS.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
+    <Content Include="Scripts\jquery.auto-grow-input.js" />
+    <Content Include="Scripts\jquery.auto-grow-input.min.js" />
     <Content Include="Scripts\jquery.mobile-1.4.5.js" />
     <Content Include="Scripts\jquery.mobile-1.4.5.min.js" />
     <Content Include="Scripts\jquery.mobile-1.4.5.min.map" />
@@ -648,10 +654,10 @@
     <Content Include="Templates\jobMail.json" />
     <Content Include="Templates\jobMail.txt" />
     <Content Include="Views\Home\SendMail.cshtml" />
+    <Content Include="Views\Home\Property.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\images\clients\spectrum\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
